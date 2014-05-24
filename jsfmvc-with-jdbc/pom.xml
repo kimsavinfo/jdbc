@@ -4,19 +4,15 @@
 	<groupId>fr.epsi</groupId>
 	<!-- artifactId correspond au nom de votre application, 
 	n'hésitez pas à changer la valeur par défaut -->
-	<artifactId>TP-JDBC</artifactId>
+	<artifactId>jsfmvc-with-jdbc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<!-- précisez le nom et l'email de chaque membre de votre groupe -->
 	<developers>
 		<developer>
-			<name>Maxime MERIGEAUX</name>
-			<email>maxime.merigeaux@gmail.com</email>
-		</developer>
-		<developer>
-			<name>Kim SAVAROCHE</name>
-			<email>kimsavinfo@gmail.com</email>
+			<name>David Gayerie</name>
+			<email>david.gayerie.epsi@mailoo.org</email>
 		</developer>
 	</developers>
 

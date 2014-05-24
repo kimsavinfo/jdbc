@@ -15,7 +15,6 @@ Une fois terminée, l'application doit permettre :
   * de récupérer la liste de tous les individus enregistrés dans le système
   * de supprimer les informations d'un individu
   
-Adresse de la servlet : http://localhost:8080/mvc-with-jdbc/individu
 
   
 INDICATIONS
