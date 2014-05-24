@@ -14,7 +14,8 @@ Une fois terminée, l'application doit permettre :
   * d'enregistrer un nouvel individu dans le système (en spécifiant son	nom, son prénom et son âge)
   * de récupérer la liste de tous les individus enregistrés dans le système
   * de supprimer les informations d'un individu
-  
+
+http://localhost:8080/jsfmvc-with-jdbc/
 
   
 INDICATIONS
