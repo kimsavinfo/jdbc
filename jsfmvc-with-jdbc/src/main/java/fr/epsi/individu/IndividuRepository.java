@@ -24,7 +24,7 @@ public class IndividuRepository {
 		Connection connection = dataSource.getConnection();
 		try {
 			
-			String request = "insert into individus (prenom,nom,age) values (?, ?, ?)";
+			String request = "EXECUTE AJOUTERINDIVIDU(?, ?, ?)";
 			
 			PreparedStatement pstmt = connection.prepareStatement(request);
 			try {

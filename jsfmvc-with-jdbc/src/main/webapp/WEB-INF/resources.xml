@@ -2,7 +2,7 @@
 <tomee>
 <Resource id="jdbc" type="javax.sql.DataSource">
   JdbcDriver oracle.jdbc.OracleDriver
-  JdbcUrl jdbc:oracle:thin:@localhost:1521:xe
+  JdbcUrl jdbc:oracle:thin:@localhost:1521:orcl
   UserName jdbc
   Password jdbc
   JtaManaged false
