@@ -22,3 +22,4 @@ INDICATIONS
 ___________
 
 Adresse du driver Oracle : C:\app\nomUtilisateur\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar
+Copier le driver dans : C:\Users\numUtilisateur\Documents\java_ee\apache-tomee-plus-1.6.0\lib
