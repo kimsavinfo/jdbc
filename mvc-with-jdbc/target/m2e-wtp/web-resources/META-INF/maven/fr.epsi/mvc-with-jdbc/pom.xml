@@ -37,6 +37,13 @@
 			<!-- le scope provided indique que cette dépendance sera fournie pour le serveur à l'exécution -->
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- ORACLE database driver -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
