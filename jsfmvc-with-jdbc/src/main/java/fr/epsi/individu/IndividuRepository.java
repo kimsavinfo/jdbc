@@ -24,7 +24,7 @@ public class IndividuRepository {
 		Connection connection = dataSource.getConnection();
 		try {
 			
-			String request = "EXECUTE AJOUTERINDIVIDU(?, ?, ?)";
+			String request = "CALL AJOUTERINDIVIDU(?, ?, ?)";
 			
 			PreparedStatement pstmt = connection.prepareStatement(request);
 			try {
