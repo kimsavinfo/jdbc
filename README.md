@@ -21,9 +21,3 @@ INDICATIONS
 ___________
 
 Adresse du driver Oracle : C:\app\nomUtilisateur\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar
-
-
-C:\app\test\product\11.2.0\dbhome_1\jdbc\lib\
-
-
-mvn install:install-file -Dfile=C:\app\test\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
