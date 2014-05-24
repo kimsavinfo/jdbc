@@ -82,8 +82,30 @@ public class IndividuRepository {
 		return result;
 	}
 
-	public void delete(long id) {
+	public void delete(long id) throws SQLException {
+		Connection connection = dataSource.getConnection();
 		
+		try {
+			
+			String request = "DELETE FROM INDIVIDUS WHERE id_individu=?";
+			
+			PreparedStatement pstmt = connection.prepareStatement(request);
+			try {
+				pstmt.setLong(1, id);
+
+				pstmt.executeUpdate();
+			}
+			finally{
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			}
+			
+		}finally{
+			if (connection != null) {
+				connection.close();
+			}
+		}
 	}
 
 }
