@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Individus</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+<div class="container">
+	<h3>Enregistrer un individu</h3>
+	<h:form styleClass="col-md-4" acceptcharset="UTF-8" >
+		<div class="form-group">
+			<h:outputLabel for="prenom" value="Prénom" />
+			<h:inputText id="prenom" styleClass="form-control" value="#{individu.prenom}"/>
+			<h:message errorClass="label label-danger" for="prenom" />
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="nom" value="Nom" />
+			<h:inputText id="nom" styleClass="form-control" value="#{individu.nom}"/>
+			<h:message errorClass="label label-danger" for="nom" />
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="age" value="Age" />
+			<h:inputText id="age" styleClass="form-control" value="#{individu.age}"/>
+			<h:message errorClass="label label-danger" for="age" />
+		</div>
+		<h:commandButton styleClass="btn btn-default" value="Enregistrer" action="#{individuRepository.create(individu)}"/>
+	</h:form>
+</div>
+
+<div class="container">
+	<h3>Liste des individus déjà enregistrés</h3>
+	<h:form>
+		<h:dataTable styleClass="table" value="#{individuRepository.all}" var="i">
+			<h:column>
+				<h:commandLink action="#{individuRepository.delete(i.id)}">
+					<span class="glyphicon glyphicon-remove-circle"></span>
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Prénom</f:facet>
+				<h:outputText value="#{i.prenom}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nom</f:facet>
+				<h:outputText value="#{i.nom}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Age</f:facet>
+				<h:outputText value="#{i.age}"/> #{i.age > 1 ? 'ans' : 'an'}
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</div>
+</h:body>
+</html>
