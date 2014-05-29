@@ -72,6 +72,8 @@ public class IndividuRepository {
 				
 				result.add(individu);
 			}
+			
+			resultSet.close();
 		}
 		finally{
 			if (connection != null) {
