@@ -1,7 +1,5 @@
 package fr.epsi.individu;
 
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,93 +18,88 @@ public class IndividuRepository {
 	@Resource(name = "jdbc")
 	private DataSource dataSource;
 	
-	public String create(Individu individu) throws SQLException {
-		
-		Connection connection = dataSource.getConnection();
-		try {
-			
+	public String create(Individu individu) throws SQLException 
+	{
+		try( java.sql.Connection connection = dataSource.getConnection() )
+		{
 			String request = "CALL AJOUTERINDIVIDU(?, ?, ?)";
 			
-			PreparedStatement pstmt = connection.prepareStatement(request);
-			try {
-
+			try( PreparedStatement pstmt = connection.prepareStatement(request) )
+			{
 				pstmt.setString(1, individu.getPrenom());
 				pstmt.setString(2, individu.getNom());
 				pstmt.setInt(3, individu.getAge());
-
+				
 				pstmt.executeUpdate();
+				connection.commit();
 			}
-			finally{
-				if (pstmt != null) {
-					pstmt.close();
-				}
-			}
+			catch (SQLException exRequest)
+			{
+				connection.rollback();
+		        throw exRequest;
+		    }
+		} 
+		catch (SQLException exConnection) 
+		{
+			exConnection.printStackTrace();
 		}
-		finally{
-			if (connection != null) {
-				connection.close();
-			}
-		}
-		return "individu?faces-redirect=true";
+		
+		return "individu?faces-redirect=true";	
 	}
 
-	public List<Individu> getAll() throws SQLException {
-		List<Individu> result = new ArrayList<>();
+	public List<Individu> getAll() throws SQLException 
+	{
+		List<Individu> listIndividus = new ArrayList<>();
 		
-		Connection connection = dataSource.getConnection();
-		try {
-			ResultSet resultSet = null;
+		try( java.sql.Connection connection = dataSource.getConnection() )
+		{
 			String request = "SELECT id_individu, nom_individu, prenom_individu, age_individu  FROM INDIVIDUS";
 			
 			PreparedStatement pstmt = connection.prepareStatement(request);
-			pstmt.execute();
-			resultSet = pstmt.getResultSet();
 			
-			while(resultSet.next())
-			{
-				Individu individu = new Individu();
-				individu.setId(resultSet.getLong(1));
-				individu.setNom(resultSet.getString(2));
-				individu.setPrenom(resultSet.getString(3));
-				individu.setAge(resultSet.getInt(4));
-				
-				result.add(individu);
+			try(ResultSet resultSet = pstmt.executeQuery())
+			{				
+				while(resultSet.next())
+				{
+					Individu individu = new Individu();
+					individu.setId(resultSet.getLong(1));
+					individu.setNom(resultSet.getString(2));
+					individu.setPrenom(resultSet.getString(3));
+					individu.setAge(resultSet.getInt(4));
+					
+					listIndividus.add(individu);
+				}
 			}
-			
-			resultSet.close();
-		}
-		finally{
-			if (connection != null) {
-				connection.close();
-			}
+		} 
+		catch (SQLException ex) 
+		{
+			ex.printStackTrace();
 		}
 		
-		return result;
+		return listIndividus;
 	}
 
-	public void delete(long id) throws SQLException {
-		Connection connection = dataSource.getConnection();
-		
-		try {
-			
+	public void delete(long id) throws SQLException 
+	{	
+		try( java.sql.Connection connection = dataSource.getConnection() )
+		{
 			String request = "DELETE FROM INDIVIDUS WHERE id_individu=?";
 			
-			PreparedStatement pstmt = connection.prepareStatement(request);
-			try {
+			try( PreparedStatement pstmt = connection.prepareStatement(request) )
+			{
 				pstmt.setLong(1, id);
 
 				pstmt.executeUpdate();
 			}
-			finally{
-				if (pstmt != null) {
-					pstmt.close();
-				}
-			}
-			
-		}finally{
-			if (connection != null) {
-				connection.close();
-			}
+			catch (SQLException exRequest)
+			{
+				connection.rollback();
+		        throw exRequest;
+		    }
+		} 
+		catch (SQLException exConnection) 
+		{
+			exConnection.printStackTrace();
 		}
 	}
 
