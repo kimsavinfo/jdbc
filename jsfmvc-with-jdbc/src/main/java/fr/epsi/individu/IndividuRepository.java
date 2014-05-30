@@ -47,15 +47,18 @@ public class IndividuRepository {
 						
 			try( java.sql.PreparedStatement pstmt = connection.prepareStatement(request) )
 			{	
-				try(java.sql.ResultSet resultSet = pstmt.executeQuery())
+				try( java.sql.ResultSet resultSet = pstmt.executeQuery())
 				{
-					Individu individu = new Individu();
-					individu.setId(resultSet.getLong(1));
-					individu.setNom(resultSet.getString(2));
-					individu.setPrenom(resultSet.getString(3));
-					individu.setAge(resultSet.getInt(4));
-					
-					listIndividus.add(individu);
+					while( resultSet.next() )
+					{
+						Individu individu = new Individu();
+						individu.setId(resultSet.getLong(1));
+						individu.setNom(resultSet.getString(2));
+						individu.setPrenom(resultSet.getString(3));
+						individu.setAge(resultSet.getInt(4));
+						
+						listIndividus.add(individu);
+					}
 				}
 			}
 		}
