@@ -24,24 +24,14 @@ public class IndividuRepository {
 		{
 			String request = "CALL AJOUTERINDIVIDU(?, ?, ?)";
 			
-			try( PreparedStatement pstmt = connection.prepareStatement(request) )
+			try( java.sql.PreparedStatement pstmt = connection.prepareStatement(request) )
 			{
 				pstmt.setString(1, individu.getPrenom());
 				pstmt.setString(2, individu.getNom());
 				pstmt.setInt(3, individu.getAge());
 				
 				pstmt.executeUpdate();
-				connection.commit();
 			}
-			catch (SQLException exRequest)
-			{
-				connection.rollback();
-		        throw exRequest;
-		    }
-		} 
-		catch (SQLException exConnection) 
-		{
-			exConnection.printStackTrace();
 		}
 		
 		return "individu?faces-redirect=true";	
@@ -54,12 +44,10 @@ public class IndividuRepository {
 		try( java.sql.Connection connection = dataSource.getConnection() )
 		{
 			String request = "SELECT id_individu, nom_individu, prenom_individu, age_individu  FROM INDIVIDUS";
-			
-			PreparedStatement pstmt = connection.prepareStatement(request);
-			
-			try(ResultSet resultSet = pstmt.executeQuery())
-			{				
-				while(resultSet.next())
+						
+			try( java.sql.PreparedStatement pstmt = connection.prepareStatement(request) )
+			{	
+				try(java.sql.ResultSet resultSet = pstmt.executeQuery())
 				{
 					Individu individu = new Individu();
 					individu.setId(resultSet.getLong(1));
@@ -70,10 +58,6 @@ public class IndividuRepository {
 					listIndividus.add(individu);
 				}
 			}
-		} 
-		catch (SQLException ex) 
-		{
-			ex.printStackTrace();
 		}
 		
 		return listIndividus;
@@ -85,21 +69,12 @@ public class IndividuRepository {
 		{
 			String request = "DELETE FROM INDIVIDUS WHERE id_individu=?";
 			
-			try( PreparedStatement pstmt = connection.prepareStatement(request) )
+			try( java.sql.PreparedStatement pstmt = connection.prepareStatement(request) )
 			{
 				pstmt.setLong(1, id);
 
 				pstmt.executeUpdate();
 			}
-			catch (SQLException exRequest)
-			{
-				connection.rollback();
-		        throw exRequest;
-		    }
-		} 
-		catch (SQLException exConnection) 
-		{
-			exConnection.printStackTrace();
 		}
 	}
 
